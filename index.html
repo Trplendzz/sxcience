@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Granny WebGL</title>
+<style>
+html, body { margin:0; padding:0; height:100%; overflow:hidden; background:black; }
+canvas { width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+<canvas id="unity-canvas"></canvas>
+<script>
+const buildUrl = "https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/Build";
+const loaderUrl = buildUrl + "/Granny.loader.js";
+
+const script = document.createElement('script');
+script.src = loaderUrl;
+script.onload = () => {
+    if(typeof createUnityInstance === "function") {
+        createUnityInstance(
+            document.querySelector('#unity-canvas'),
+            {
+                dataUrl: buildUrl + "/Granny.data",
+                frameworkUrl: buildUrl + "/Granny.framework.js",
+                codeUrl: buildUrl + "/Granny.wasm",
+                streamingAssetsUrl: buildUrl + "/StreamingAssets",
+                companyName: "Anastasia Kazantseva",
+                productName: "Granny",
+                productVersion: "1.0"
+            }
+        );
+    }
+};
+document.body.appendChild(script);
+</script>
+</body>
+</html>
